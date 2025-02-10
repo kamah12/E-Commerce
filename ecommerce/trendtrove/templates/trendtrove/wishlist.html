@@ -1,0 +1,52 @@
+{% extends "trendtrove/layouts/main.html" %}
+
+{% block content %}
+
+<div class="py-3 bg-primary part">
+    <div class="container">
+        <a class="text-white navTrail" href="{% url "home" %}">Home /</a>
+        <a class="text-white navTrail" href="{% url "wishlist" %}">Wishlist</a> 
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-body wishdata">
+                        {% if wishlist %}
+                        <h4 class="text-center">Your Wishlist</h4>
+                        <hr>
+                        {% for item in wishlist %}
+                            <div class="row product_data mt-3">
+                                <div class="col-md-2 my-auto">
+                                    <img src="{{ item.product.product_image.url }}" height="70px" width="70px" alt="Product Image" class="img-fluid">
+                                </div>
+                                <div class="col-md-3 my-auto">
+                                    <h6> {{ item.product.name }} </h6>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <h6> Ksh {{item.product.selling_price | stringformat:'d' }} </h6>
+                                </div>
+                                <div class="col-md-3 my-auto">
+                                    <input type="hidden" class="prodId" value="{{ item.product_id }}">
+                                    {% csrf_token %}
+                                    <a href="{% url 'productview' item.product.category.slug item.product.slug %}" class="btn btn-primary"><i class="fa fa-eye"></i> View Product</a>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <button class="btn btn-danger remove-from-wishlist"><i class="fa fa-trash"></i> Remove </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% else %}
+                            <p class="text-center text-danger">Your wishlist is empty!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

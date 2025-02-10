@@ -1,0 +1,39 @@
+{% extends "trendtrove/layouts/main.html" %}
+
+{% block content %}
+
+<div class="container part">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="">
+                <div class="card mt-3 shadow">
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="text-center">
+                                <h4>Login</h4>
+                            </div>
+                            <hr>
+
+                            <div class="form-group">
+                                <label for="">Username :</label>
+                                <input type="text" class="form-control" name="username" placeholder="Enter username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Password :</label>
+                                <input type="password" class="form-control" name="password" placeholder="Enter username">
+                            </div>
+
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn shadow btn-primary btnOne">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
